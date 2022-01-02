@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>입력창</title>
+        <meta charset="UTF-8">
+        <script src="/D:/08.TIL/TIL/HTML/JQuery/jquery-1.10.2.min.js"></script>
+        <script src="/D:/08.TIL/TIL/HTML/JQuery/jquery-migrate-1.2.1.min.js"></script>
+
+
+        <script>
+            $(document).ready ( function (){
+                getParam();
+            });
+
+            $(function() { // 로드 완료 후 실행됨 - JQuery
+                $('#hsul').css('color','green');
+                document.getElementById("rs1").innerHTML= getParam("a1");
+                document.getElementById("rs2").innerHTML= getParam("a2");
+                document.getElementById("rs3").innerHTML= calBmi(getParam("a1"),getParam("a2")).fontcolor('red');
+            })
+
+            function getParam(sname){
+                var params = location.search.substr(location.search.indexOf("?")+1);
+                var sval = "";
+                params = params.split("&");
+
+                for(var i=0; i<params.length;i++){
+                    temp = params[i].split("=");
+                    if([temp[0]] == sname){sval = temp[1];}
+                }
+                return sval;
+            }
+
+            function calBmi(height,Weight){
+                var sval = "";
+                var cal = Weight / ((height*height) * 0.0001);
+                var result = cal.toFixed(2);
+                
+                if(result < 18.5 ){
+                    sval = "저체중";
+                }
+                else if (result == 18.5 || result < 23){
+                    sval = "정상체중";
+                }
+                else if (result == 23 || result < 25.00 ){
+                    sval = "과체중";
+                }
+                else if (result >= 25.00){
+                    sval = "비만";
+                }
+                else {
+                    sval = "Error";
+                }
+                return sval;
+            }
+
+            function callBack(){
+                location.href = "insert.html";
+            }
+
+        </script>
+    </head>
+    <body>
+        <h1 id="hsul">Bmi 계산결과</h1>
+        
+        <ui>
+            <li id="rs1"></li>
+            <li id="rs2"></li>
+            <li id="rs3"></li>
+        </ui>
+        <br />
+        <button onclick="javascript:callBack();">다시입력</button>
+
+    </body>
+</html>
