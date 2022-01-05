@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>연도테스트</title>
+    <meta charset="UTF-8">
+    <script src="/D:/08.TIL/TIL/HTML/JQuery/jquery-1.10.2.min.js"></script>
+    <script src="/D:/08.TIL/TIL/HTML/JQuery/jquery-migrate-1.2.1.min.js"></script>
+
+
+    <script>
+      $(document).ready( function(){
+        getUrlParam();
+        
+        let [vad,bd] = transFormat();
+        //document.getElementById("a2").innerHTML = getUrlParam("b1");
+        document.getElementById("a2").innerHTML = vad;
+        document.getElementById("a3").innerHTML = bd;
+      });
+      
+      function getUrlParam(sParam){
+        var params = location.search.substr(location.search.indexOf("?")+1);
+                var sval = "";
+                params = params.split("&");
+
+                for(var i=0; i<params.length;i++){
+                    temp = params[i].split("=");
+                    if([temp[0]] == sParam){sval = temp[1];}
+                }
+                return sval;
+      }
+
+      function transFormat(){
+        var Year = getUrlParam("b1");
+        Year = ''+Year;
+        var resYear = Year.toString();
+
+        var Yeln = resYear.length;
+        return [Year,Yeln];
+      }
+
+      function goBack(){
+        window.location.href="index.html";
+        //javascript:history.back();
+      }
+      
+
+    </script>
+  </head>
+  <body>
+    <h2 id ="a1">년도포맷 변경 결과</h2>
+    <span id="a2"></span>
+    <span id="a3"></span>
+    <p><%vad%></p>
+    <button id="bt1" onclick="javascript:goBack();">뒤로</button>
+
+  </body>
+</html>
