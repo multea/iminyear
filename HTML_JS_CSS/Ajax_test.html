@@ -1,0 +1,16 @@
+<script>
+    /* Ajax fetch 방식 테스트  */
+    fetch('https://codingapple1.github.io/price.json')
+    .then((response) => {
+        return response.json()
+        if(!response.ok) {
+            throw new Error('400 or 500')
+        }
+    })
+    .then((결과) => {
+        console.log(결과)
+    })
+    .catch(() => {
+        console.log('error')
+    })
+</script>
